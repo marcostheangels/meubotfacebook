@@ -7,19 +7,35 @@
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#eef2f7;color:#172033}
 .phone{max-width:430px;min-height:100vh;margin:auto;background:#fff}.top{padding:22px 20px 18px;background:#1877f2;color:#fff}
 h1{font-size:24px;margin:0 0 4px}.sub{opacity:.9;font-size:13px}
-main{padding:18px}.step{display:flex;gap:8px;margin-bottom:18px}.step span{padding:7px 11px;border-radius:20px;background:#e8eef8;font-size:12px}.step .on{background:#1877f2;color:#fff}
+main{padding:18px}.step{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}.step span{padding:7px 11px;border-radius:20px;background:#e8eef8;font-size:12px}.step .on{background:#1877f2;color:#fff}
 label{display:block;font-weight:650;font-size:14px;margin:14px 0 7px}input,textarea{width:100%;border:1px solid #ccd5e2;border-radius:10px;padding:12px;font:inherit}textarea{min-height:130px;resize:vertical}
 .attach{border:2px dashed #b9c6d8;border-radius:12px;padding:18px;text-align:center}.attach input{border:0;padding:8px 0}
-.preview{margin-top:16px;border:1px solid #dce3ed;border-radius:12px;overflow:hidden}.preview .head{padding:12px;font-weight:700}.preview .body{padding:0 12px 14px;white-space:pre-wrap}.actions{display:flex;gap:10px;margin-top:18px}button{flex:1;border:0;border-radius:10px;padding:13px;font-weight:700;font-size:14px}button.primary{background:#1877f2;color:#fff}button.secondary{background:#e8eef8;color:#172033}
+.card{margin-top:16px;border:1px solid #dce3ed;border-radius:12px;padding:15px}.status{display:flex;align-items:center;gap:9px;font-size:13px}.dot{width:10px;height:10px;border-radius:50%;background:#9aa7b8}.connected .dot{background:#2ca66f}
+.groups{margin-top:12px;display:none}.group{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #edf0f4}.group:last-child{border:0}.group input{width:auto}
+.preview{margin-top:16px;border:1px solid #dce3ed;border-radius:12px;overflow:hidden}.preview .head{padding:12px;font-weight:700}.preview .body{padding:0 12px 14px;white-space:pre-wrap}.actions{display:flex;gap:10px;margin-top:18px}button{flex:1;border:0;border-radius:10px;padding:13px;font-weight:700;font-size:14px}button.primary{background:#1877f2;color:#fff}button.secondary{background:#e8eef8;color:#172033}button:disabled{opacity:.55}
 </style>
 </head>
 <body><div class="phone">
 <header class="top"><h1>MeuBotFacebook</h1><div class="sub">Criador de anúncios · Modo teste</div></header>
 <main>
-<div class="step"><span class="on">1 Criar</span><span>2 Grupos</span><span>3 Publicar</span></div>
+<div class="step"><span class="on">1 Criar</span><span class="on">2 Grupos</span><span>3 Publicar</span></div>
+
 <label for="title">Título do anúncio</label><input id="title" placeholder="Ex.: Sabadão do Forró">
 <label for="text">Texto da publicação</label><textarea id="text" placeholder="Escreva o anúncio aqui..."></textarea>
 <label>Anexar imagem ou arquivos</label><div class="attach">Selecione os arquivos<input id="files" type="file" multiple accept="image/*,.pdf,.doc,.docx,.txt"></div>
+
+<div id="facebookCard" class="card">
+<div id="status" class="status"><span class="dot"></span><strong>Facebook não conectado</strong></div>
+<p style="font-size:13px;color:#5d6878">Conecte sua conta de teste para carregar somente os grupos que a integração oficial disponibilizar.</p>
+<button class="primary" id="connect" onclick="connectFacebook()">Conectar Facebook de teste</button>
+<div id="groups" class="groups">
+<strong>Meus grupos disponíveis</strong>
+<div class="group"><input type="checkbox" checked><span>Grupo de teste — divulgação</span></div>
+<div class="group"><input type="checkbox"><span>Outro grupo disponível</span></div>
+<small style="color:#687487">Os grupos exibidos aqui são apenas uma simulação até a autenticação oficial da Meta.</small>
+</div>
+</div>
+
 <div id="preview" class="preview"><div class="head">Prévia do anúncio</div><div class="body">Preencha o título e o texto para visualizar.</div></div>
 <div class="actions"><button class="secondary" onclick="preview()">Ver prévia</button><button class="primary" onclick="saveAd()">Salvar anúncio</button></div>
 </main></div>
@@ -28,4 +44,11 @@ const title=document.getElementById('title'), text=document.getElementById('text
 function preview(){document.querySelector('#preview .head').textContent=title.value||'Prévia do anúncio';document.querySelector('#preview .body').textContent=text.value||'Preencha o texto para visualizar.'}
 function saveAd(){localStorage.setItem('meubotfacebook-anuncio',JSON.stringify({title:title.value,text:text.value}));alert('Anúncio salvo neste navegador.')}
 files.addEventListener('change',()=>{document.querySelector('.attach').firstChild.textContent=files.files.length+' arquivo(s) selecionado(s)';});
+function connectFacebook(){
+ document.getElementById('status').classList.add('connected');
+ document.getElementById('status').innerHTML='<span class="dot"></span><strong>Conta de teste conectada</strong>';
+ document.getElementById('connect').disabled=true;
+ document.getElementById('connect').textContent='Facebook conectado';
+ document.getElementById('groups').style.display='block';
+}
 </script></body></html>
