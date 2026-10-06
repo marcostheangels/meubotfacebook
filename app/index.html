@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeuBotFacebook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>MeuBotFacebook</h1>
+    <p class="subtitle">Criador de anúncios</p>
+
+    <section class="card">
+      <label for="titulo">Título</label>
+      <input id="titulo" type="text" placeholder="Ex.: Sabadão do Forró">
+
+      <label for="texto">Texto do anúncio</label>
+      <textarea id="texto" rows="7" placeholder="Escreva o texto da publicação..."></textarea>
+
+      <label for="imagem">Imagem</label>
+      <input id="imagem" type="file" accept="image/*">
+
+      <button id="previewBtn">Visualizar anúncio</button>
+    </section>
+
+    <section id="preview" class="card preview hidden">
+      <h2 id="previewTitle"></h2>
+      <img id="previewImage" alt="Imagem do anúncio">
+      <p id="previewText"></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
