@@ -3,31 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MeuBotFacebook</title>
+  <title>MeuBotFacebook — Teste</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <h1>MeuBotFacebook</h1>
-    <p class="subtitle">Criador de anúncios</p>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">MEUBOTFACEBOOK</span>
+        <h1>Preparar publicação</h1>
+      </div>
+      <span class="status">Modo teste</span>
+    </header>
+
+    <nav class="steps" aria-label="Etapas">
+      <span class="active">1. Criar</span>
+      <span>2. Grupos</span>
+      <span>3. Publicar</span>
+    </nav>
 
     <section class="card">
-      <label for="titulo">Título</label>
+      <label for="titulo">Título do anúncio</label>
       <input id="titulo" type="text" placeholder="Ex.: Sabadão do Forró">
 
-      <label for="texto">Texto do anúncio</label>
-      <textarea id="texto" rows="7" placeholder="Escreva o texto da publicação..."></textarea>
+      <label for="texto">Texto da publicação</label>
+      <textarea id="texto" rows="6" placeholder="Escreva o texto que será divulgado nos grupos..."></textarea>
 
       <label for="imagem">Imagem</label>
       <input id="imagem" type="file" accept="image/*">
 
-      <button id="previewBtn">Visualizar anúncio</button>
+      <label for="link">Link (opcional)</label>
+      <input id="link" type="url" placeholder="https://...">
+
+      <button id="previewBtn" type="button">Ver prévia</button>
     </section>
 
-    <section id="preview" class="card preview hidden">
-      <h2 id="previewTitle"></h2>
-      <img id="previewImage" alt="Imagem do anúncio">
-      <p id="previewText"></p>
+    <section id="preview" class="card preview hidden" aria-live="polite">
+      <div class="preview-head">
+        <span class="eyebrow">PRÉVIA</span>
+        <span class="facebook">Facebook • teste</span>
+      </div>
+      <h2 id="previewTitle">Seu anúncio</h2>
+      <img id="previewImage" class="preview-image hidden" alt="Prévia da imagem">
+      <p id="previewText">O texto aparecerá aqui.</p>
+      <a id="previewLink" class="preview-link hidden" target="_blank" rel="noopener noreferrer"></a>
+      <div class="groups-box">
+        <strong>Grupos de destino</strong>
+        <p>Na próxima etapa, vamos conectar a conta de teste e carregar os grupos autorizados pela Meta.</p>
+      </div>
     </section>
   </main>
   <script src="app.js"></script>
